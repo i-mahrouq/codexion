@@ -4,24 +4,20 @@
 #include <stdio.h>
 
 
-int is_nbr(const char *nbr)
+int is_nbr(const char *str)
 {
     int i;
 
     i = 0;
-    if (!nbr || !nbr[i])
+    if (!str || !str[i])
         return (0);
-    else if (nbr[i] == '+')
+    while (str[i])
+    {
+        if (str[i] < '0' || str[i] > '9')
+            return (0);
         i++;
-	if (!nbr[i])
-        return 0;
-    while (nbr[i])
-	{
-		if (nbr[i] < '0' || nbr[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
+    }
+    return (1);
 }
 
 long	ft_atoi(const char *str)
@@ -44,9 +40,19 @@ long	ft_atoi(const char *str)
 	}
 	return ((int)(r));
 }
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
 
-
-
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}
 
 int is_valid(const char **input)
 {
@@ -57,7 +63,7 @@ int is_valid(const char **input)
 	if (!is_nbr(input[1]) || n == 0 || n == 9999999999)
 		return 0;
 	i = 2;
-	while (i < 9)
+	while (i < 8)
 	{
 		if(is_nbr(input[i]))
 		{	
@@ -69,6 +75,7 @@ int is_valid(const char **input)
 			return (0);
 		i++;
 	}
+	if (ft_strcmp(input[8], "fifo") != 0 && ft_strcmp(input[8], "edf") != 0)
+        return (0);
 	return (1);
 }
-
