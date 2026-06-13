@@ -4,9 +4,16 @@
 
 int main(int ac, char const *av[])
 {
-    if (ac == 9 && is_valid(av))
-        printf("hah:");
+    t_config config;
+
+    memset(&config, 0, sizeof(t_config));
+    if (ac =! 9 && !is_valid(av)){
+        write(2, "Error: Invalid arguments\n", 25);
+        return (1);
+    }
     else
-        printf("usage");
+    {
+
+    }
     return 0;
 }
