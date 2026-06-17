@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 int is_valid(const char **input);
 // mcros
@@ -51,15 +52,18 @@ typedef struct s_dongle {
     t_dongle_state  state;
     t_dongle_heat   heat;
 
-
+    t_simulation    *sim;
     // parms for queue
+    t_coder *heap[2];
+    int heap_size;
+    
 }   t_dongle;
 
 typedef struct s_coder {
     int id;
     pthread_t thread_id;
     int count_comp;
-
+    long request_time;
 
     long long last_compile_start;
 
@@ -70,11 +74,11 @@ typedef struct s_coder {
 
 
 
-typedef struct s_simu {
+typedef struct s_simulation {
     t_config *config;
     t_coder         *coders;        
     t_dongle        *dongles;       
     long long       start_ms;
-}   t_simu;
+}   t_simulation;
 
 #endif
